@@ -1,16 +1,23 @@
 """
 # Definition for a Node.
-class Node:
+class Node(object):
     def __init__(self, val=None, children=None):
         self.val = val
         self.children = children
 """
-class Solution:
-    def postorder(self, root: 'Node') -> List[int]:
+class Solution(object):
+    def preorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
         outList = []
         if not root:
-            pass
+            return []
+        if not root.children:
+            return [root.val]
         outList.append(root.val)
         for child in root.children:
-            outList += Solution.postorder(self,child)
+            outList.extend(Solution.preorder(self,child))
         return outList
+        
